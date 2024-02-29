@@ -5,7 +5,7 @@ import user2 from "@/../public/images/users/user2.jpg";
 import user3 from "@/../public/images/users/user3.jpg";
 import user4 from "@/../public/images/users/user4.jpg";
 import user5 from "@/../public/images/users/user5.jpg";
-
+import DataTableCustom from "../shared/DataTableCustom";
 const tableData = [
   {
     avatar: user1,
@@ -63,7 +63,8 @@ const ProjectTables = () => {
           Overview of the projects
         </CardSubtitle>
         <div className="table-responsive">
-          <Table className="text-nowrap mt-3 align-middle" bordered>
+          <DataTableCustom></DataTableCustom>
+          {/* <Table className="text-nowrap mt-3 align-middle" bordered>
             <thead>
               <tr>
                 <th>Team Lead</th>
@@ -107,7 +108,7 @@ const ProjectTables = () => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table> */}
         </div>
       </CardBody>
     </Card>
