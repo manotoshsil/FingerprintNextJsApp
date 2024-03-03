@@ -16,11 +16,20 @@ import {
 } from "reactstrap";
 import LogoWhite from "@/../public/images/logos/xtremelogowhite.svg";
 import user1 from "@/../public/images/users/user1.jpg";
+import { useAuthContext } from "../../../context/AuthContextProvider";
+import { useRouter } from "next/navigation";
+import {
+    getAuth
+} from 'firebase/auth';
+import firebase_app from '../../../firebase/config';
+const auth = getAuth(firebase_app);
 
 const Header = ({ showMobmenu }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
+  const { user , setUser } = useAuthContext();
+  const router = useRouter();
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
@@ -71,13 +80,13 @@ const Header = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Info</DropdownItem>
+            <DropdownItem header>{user?.Email}</DropdownItem>
             <DropdownItem>My Account</DropdownItem>
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Balance</DropdownItem>
             <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem>Logout</DropdownItem>
+            <DropdownItem onClick={async () => {  await  auth.signOut(); router.push("/")}}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>

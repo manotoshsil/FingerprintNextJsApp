@@ -3,7 +3,14 @@ import { Row, Col,Button, Table, Card, CardTitle, CardBody } from "reactstrap";
 import { useEffect , useState , useMemo } from "react";
 import DataTable  from "react-data-table-component";
 import styled from 'styled-components';
-import DataTableCustom from "../../../components/shared/DataTableCustom";
+import { useAuthContext } from "../../../../context/AuthContextProvider";
+import { useRouter } from "next/navigation";
+import {
+    getAuth
+} from 'firebase/auth';
+import firebase_app from '../../../../firebase/config';
+
+const auth = getAuth(firebase_app);
 const StudentListTable = () => {
 
     const [data, setData] = useState(null);
@@ -11,6 +18,9 @@ const StudentListTable = () => {
     const [columns, setColumns] = useState([]);
     const [filterText, setFilterText] = useState('');
     const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+    const { user , setUser } = useAuthContext();
+    const router = useRouter();
+
     let rows ;
     let filteredItems;
      const orgId = 5;
@@ -34,9 +44,10 @@ const StudentListTable = () => {
     useEffect( () =>   {
         async function fetchData() {
             // You can await here
-            console.log("***********");
-            const response = await fetch('http://127.0.0.1:5001/fingerprint-capture/us-central1/getAllStudents');
-           
+           debugger;
+            if (user == null) router.push("/");
+           // const response = await fetch('http://127.0.0.1:5001/fingerprint-capture/us-central1/getAllStudents');
+           const reponse =await fetch('https://getallstudents-rojufsalfa-uc.a.run.app');
             rows = await response.json();
             setLoading(false);
             setData(rows.students);
@@ -109,7 +120,9 @@ const StudentListTable = () => {
         {data && <DataTable title="Student List" columns={columns}  progressPending={isLoading}  data={data} pagination paginationResetDefaultPage={resetPaginationToggle} 
         subHeader subHeaderComponent={subHeaderComponentMemo} selectableRows persistTableHead />}
       </Col>
-      
+      <Col lg="12"> 
+        Loggedin User :- {user?.email}
+      </Col>
     </Row>
   );
 };

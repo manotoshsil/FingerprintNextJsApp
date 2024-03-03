@@ -1,4 +1,5 @@
 import Head from "next/head";
+import AuthContextProvider from './context/AuthContextProvider';
 import "@/styles/style.scss";
 export default function RootLayout({
   // Layouts must accept a children prop.
@@ -12,7 +13,7 @@ export default function RootLayout({
         <meta name="description" content="Xtreme Free Next Js Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>{children}</body>
+      <body><AuthContextProvider>{children}</AuthContextProvider></body>
     </html>
   )
 }

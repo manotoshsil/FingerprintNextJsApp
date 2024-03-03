@@ -2,6 +2,7 @@
 import React from "react";
 import { Container } from "reactstrap";
 import Header from "./layouts/header/Header";
+import AuthContextProvider from '../context/AuthContextProvider';
 // import Sidebar from "./layouts/sidebars/vertical/Sidebar";
 
 import NavSideBar from "./layouts/sidebars/custom/Navsidebar";
@@ -31,7 +32,7 @@ const FullLayout = ({ children }) => {
 
           {/********Middle Content**********/}
           <Container className="p-4 wrapper" fluid>
-            <div>{children}</div>
+            <div><AuthContextProvider>{children}</AuthContextProvider></div>
           </Container>
         </div>
       </div>
