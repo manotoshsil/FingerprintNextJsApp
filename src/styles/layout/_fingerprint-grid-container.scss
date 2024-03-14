@@ -1,0 +1,22 @@
+.fingerprint-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+   
+  }
+
+  .fingerprint-grid-container > .box-item {
+      align-content: flex-start;
+     
+      width: calc(33.33% - 40px);
+  }
+ .box-item img { 
+     width:100%;
+  }
+
+@media(max-width:767px){
+.fingerprint-grid-container > .box-item { 
+  width:100%; 
+}
+}

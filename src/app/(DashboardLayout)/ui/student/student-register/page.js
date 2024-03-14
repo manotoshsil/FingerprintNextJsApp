@@ -11,9 +11,11 @@ import {
   Label,
   Input,
   FormText,
-} from 'reactstrap';
 
-const Forms = () => {
+} from 'reactstrap';
+import Image from 'next/image'
+import CaptureMyFingerprint from '../../../../fingerprint-mfs100-utility/react-add-student';
+const Forms =  () => {
   return (
     <Row>
       <Col>
@@ -28,71 +30,120 @@ const Forms = () => {
           <CardBody>
             <Form>
               <FormGroup>
-                <Label for="exampleEmail">Email</Label>
+                <Label for="fullName">Full Name</Label>
                 <Input
-                  id="exampleEmail"
-                  name="email"
-                  placeholder="with a placeholder"
-                  type="email"
+                  id="fullName"
+                  name="fullName"
+                  placeholder="Full Name"
+                  type="text"
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="examplePassword">Password</Label>
+                <Label for="adhaarNumber">Adhaar Number</Label>
                 <Input
-                  id="examplePassword"
-                  name="password"
-                  placeholder="password placeholder"
-                  type="password"
+                  id="adhaarNumber"
+                  name="adhaarNumber"
+                  placeholder="Adhaar placeholder"
+                  type="text"
+                  onBlur={(e) => {
+                    debugger;
+                    var regex = /^([0-9]{4}[0-9]{4}[0-9]{4}$)|([0-9]{4}\s[0-9]{4}\s[0-9]{4}$)|([0-9]{4}-[0-9]{4}-[0-9]{4}$)/;
+                    if (regex.test(e.target.value)) {
+                      e.target.setCustomValidity("");
+                      //$("#lblError").css("visibility", "hidden");
+                    } else {
+                      e.target.setCustomValidity("Invalid Adhaar");
+                    }
+                  }}
                 />
               </FormGroup>
+
+
               <FormGroup>
-                <Label for="exampleSelect">Select</Label>
-                <Input id="exampleSelect" name="select" type="select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Input>
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleSelectMulti">Select Multiple</Label>
-                <Input id="exampleSelectMulti" multiple name="selectMulti" type="select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                </Input>
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleText">Text Area</Label>
-                <Input id="exampleText" name="text" type="textarea" />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleFile">File</Label>
+                <Label for="exampleFile">Student Photo</Label>
                 <Input id="exampleFile" name="file" type="file" />
-                <FormText>
+                {/* <FormText>
                   This is some placeholder block-level help text for the above input. Its a bit
                   lighter and easily wraps to a new line.
-                </FormText>
+                </FormText> */}
               </FormGroup>
               <FormGroup tag="fieldset">
-                <legend>Radio Buttons</legend>
-                <FormGroup check >
-                  <Input name="radio1" type="radio" />{' '}
-                  <Label check className="form-label">Option one is this and that—be sure to include why its great</Label>
-                </FormGroup>
-                <FormGroup check>
-                  <Input name="radio1" type="radio" />{' '}
-                  <Label check className="form-label">
-                    Option two can be something else and selecting it will deselect option one
-                  </Label>
-                </FormGroup>
-                <FormGroup check disabled>
-                  <Input disabled name="radio1" type="radio" />{' '}
-                  <Label className="form-label" check>Option three is disabled</Label>
-                </FormGroup>
+                <legend>Finger prints</legend>
+                <div class="fingerprint-grid-container">
+                  <div class="box-item">
+                    <Image alt="" id="finger1Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q1">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger1Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger1Value').removeAttribute('src');
+                        document.querySelector('#finger1Value').style.backgroundColor = "#bed7ee";
+                        await CaptureMyFingerprint(1);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+                  <div class="box-item">
+                    <Image alt="" id="finger2Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q2">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger2Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger2Value').removeAttribute('src');
+                        document.querySelector('#finger2Value').style.backgroundColor = "#bed7ee";
+                       await CaptureMyFingerprint(2);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+
+                  <div class="box-item">
+                    <Image alt="" id="finger3Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q3">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger3Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger3Value').removeAttribute('src');
+                        document.querySelector('#finger3Value').style.backgroundColor = "#bed7ee";
+                       await CaptureMyFingerprint(3);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+                  <div class="box-item">
+                    <Image alt="" id="finger4Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q4">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger4Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger4Value').removeAttribute('src');
+                        document.querySelector('#finger4Value').style.backgroundColor = "#bed7ee";
+                        await CaptureMyFingerprint(4);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+                  <div class="box-item">
+                    <Image alt="" id="finger5Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q5">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger5Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger5Value').removeAttribute('src');
+                        document.querySelector('#finger5Value').style.backgroundColor = "#bed7ee";
+                        await CaptureMyFingerprint(5);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+                  <div class="box-item">
+                    <Image alt="" id="finger6Value" src="https://dummyimage.com/300x400/c8f098/fff&text=fingerprint+image" width={300}
+                      height={400} /><span id="q6">quality</span>
+                    <div class="box-text">
+                      <Button style={{ backgroundColor: "seagreen" }} className="mt-1 lg-1 sm-1 xs-1 " onClick={async (e) => {
+                        document.querySelector("#finger6Value").setAttribute("autofocus", "true");
+                        document.querySelector('#finger6Value').removeAttribute('src');
+                        document.querySelector('#finger6Value').style.backgroundColor = "#bed7ee";
+                       await CaptureMyFingerprint(6);
+                      }} >Capture  </Button>
+                    </div>
+                  </div>
+                </div>
               </FormGroup>
               <FormGroup check>
                 <Input type="checkbox" /> <Label check>Check me out</Label>
@@ -102,7 +153,7 @@ const Forms = () => {
           </CardBody>
         </Card>
       </Col>
-    </Row>
+    </Row >
   );
 };
 

@@ -6,9 +6,20 @@ import AuthContextProvider from '../context/AuthContextProvider';
 // import Sidebar from "./layouts/sidebars/vertical/Sidebar";
 
 import NavSideBar from "./layouts/sidebars/custom/Navsidebar";
+import { useAuthContext } from "../context/AuthContextProvider";
+import { useRouter } from "next/navigation";
+import {
+    getAuth
+} from 'firebase/auth';
+import firebase_app from '../firebase/config';
 
+const auth = getAuth(firebase_app);
 const FullLayout = ({ children }) => {
   const [open, setOpen] = React.useState(false);
+  const { user , setUser } = useAuthContext();
+  const router = useRouter();
+
+  if (user == null) router.push("/pages/signin");
   const showMobilemenu = () => {
     setOpen(!open);
   };

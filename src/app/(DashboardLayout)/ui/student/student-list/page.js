@@ -44,10 +44,9 @@ const StudentListTable = () => {
     useEffect( () =>   {
         async function fetchData() {
             // You can await here
-           debugger;
-            if (user == null) router.push("/");
+            if (user == null) router.push("/pages/signin");
            // const response = await fetch('http://127.0.0.1:5001/fingerprint-capture/us-central1/getAllStudents');
-           const reponse =await fetch('https://getallstudents-rojufsalfa-uc.a.run.app');
+           const response =await fetch('https://getallstudents-rojufsalfa-uc.a.run.app');
             rows = await response.json();
             setLoading(false);
             setData(rows.students);
@@ -120,9 +119,7 @@ const StudentListTable = () => {
         {data && <DataTable title="Student List" columns={columns}  progressPending={isLoading}  data={data} pagination paginationResetDefaultPage={resetPaginationToggle} 
         subHeader subHeaderComponent={subHeaderComponentMemo} selectableRows persistTableHead />}
       </Col>
-      <Col lg="12"> 
-        Loggedin User :- {user?.email}
-      </Col>
+     
     </Row>
   );
 };

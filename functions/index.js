@@ -26,6 +26,7 @@ exports.saveStudent = onRequest((request, response) => {
 exports.getAllStudents = onRequest((request, response) => {
   logger.info("Hello logs!", {structuredData: true});
   response.setHeader('Content-Type', 'application/json');
+  response.setHeader('Access-Control-Allow-Origin', '*');
   response.send(JSON.stringify({ "students":[{"id":1,"Name":"Tait","Email":"tmilnthorpe0@usatoday.com","Address":"6382 Harbort Alley"},
   {"id":2,"Name":"Udall","Email":"ukleinplac1@abc.net.au","Address":"90 Clyde Gallagher Plaza"},
   {"id":3,"Name":"Franklin","Email":"fduignan2@craigslist.org","Address":"06 Tennessee Crossing"},

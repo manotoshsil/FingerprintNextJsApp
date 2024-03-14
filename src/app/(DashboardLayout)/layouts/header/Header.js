@@ -34,7 +34,6 @@ const Header = ({ showMobmenu }) => {
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
-
   return (
     <Navbar color="primary" dark expand="md">
       <div className="d-flex align-items-center">
@@ -80,13 +79,13 @@ const Header = ({ showMobmenu }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>{user?.Email}</DropdownItem>
+            <DropdownItem >User Email</DropdownItem>
             <DropdownItem>My Account</DropdownItem>
             <DropdownItem>Edit Profile</DropdownItem>
             <DropdownItem divider />
             <DropdownItem>My Balance</DropdownItem>
             <DropdownItem>Inbox</DropdownItem>
-            <DropdownItem onClick={async () => {  await  auth.signOut(); router.push("/")}}>Logout</DropdownItem>
+            <DropdownItem onClick={async () => {  await  auth.signOut(); router.push("/pages/signin")}}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
       </Collapse>
